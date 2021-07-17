@@ -5,7 +5,6 @@
         "target": "es2015",
         "baseUrl": ".",
         "stripInternal": true,
-        "emitDecoratorMetadata": false,
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "outDir": "../build",
@@ -17,8 +16,8 @@
         "skipLibCheck": true,
         "types": [],
         "paths": {
-            "@asoftwareworld/credit-card-validator/*": [
-                "src/lib/*/public_api"
+            "@asoftwareworld/card-validator/*": [
+                "src/app/component/*/public_api"
             ]
         }
     },

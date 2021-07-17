@@ -1,10 +1,26 @@
-/**
- * @license
- * Copyright ASW (A Software World) All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file
- */
+import { CardType, cards } from '@asoftwareworld/card-validator/api';
+
+// export const validateCardNumber = (cardNumber: string): CardType =>
+//     cards.find((card: CardType) => {
+//         // const patterns = card.patterns.map(
+//         //     pattern => new RegExp(`^${pattern}`, 'g')
+//         // );
+//         const matchResult = card.patterns
+//             .map((pattern: [number] | [number[]]) => rawValue.match(pattern))
+//             .filter(result => result);
+
+//         return !!matchResult.length;
+//     }) || null;
+
+export function validateCardNumber(cardNumber: string): any {
+    return cards.find((card: any) => {
+        const matchResult = card.patterns
+            .map((pattern: number | number[]) => validator(cardNumber, pattern))
+            .filter((result: any) => result);
+
+        return !!matchResult.length;
+    });
+}
 
 function validateRange(cardNumber: string, min: number | string, max: number | string): boolean {
     const maxLengthToCheck = String(min).length;
@@ -31,3 +47,4 @@ export function validator(cardNumber: string, pattern: string | number | string[
     }
     return validatePattern(cardNumber, pattern);
 }
+

@@ -1,15 +1,21 @@
-/**
- * @license
- * Copyright ASW (A Software World) All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file
- */
-import { Verification } from '../type/verification';
+import { FormControl } from '@angular/forms';
+import { Verification } from './type/verification';
 
+export const CardCvvValidator = (control: FormControl) => {
+    const cardcvv = cvv(control.value);
+    return (cardcvv.isValid) ? null : { invalidCvv: true };
+};
+
+// tslint:disable-next-line:no-bitwise
 const DEFAULT_LENGTH = 3;
 
 function includes(array: number[], thing: number): boolean {
+    // array.forEach((value: number) => {
+    //     if (thing === value) {
+    //         return true;
+    //     }
+    // });
+
     for (let i = 0; i < array.length; i++) {
         if (thing === array[i]) {
             return true;
@@ -30,17 +36,11 @@ function max(array: number[]): number {
     return maximum;
 }
 
-function verification(
-    isValid: boolean,
-    isPotentiallyValid: boolean
-): Verification {
+function verification(isValid: boolean, isPotentiallyValid: boolean): Verification {
     return { isValid, isPotentiallyValid };
 }
 
-export function cvv(
-    value: string | unknown,
-    maxLength: number | number[] = DEFAULT_LENGTH
-): Verification {
+function cvv(value: string | unknown, maxLength: number | number[] = DEFAULT_LENGTH): Verification {
     maxLength = maxLength instanceof Array ? maxLength : [maxLength];
 
     if (typeof value !== 'string') {
@@ -58,6 +58,5 @@ export function cvv(
     if (value.length > max(maxLength)) {
         return verification(false, false);
     }
-
     return verification(true, true);
 }

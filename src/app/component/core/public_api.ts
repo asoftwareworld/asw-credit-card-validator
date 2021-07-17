@@ -5,8 +5,6 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file
  */
-export const isArray =
-    Array.isArray ||
-    function(arg?): boolean {
-        return Object.prototype.toString.call(arg) === '[object Array]';
-    };
+
+export * from './card.validator';
+export * from './number-only';

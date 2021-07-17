@@ -5,10 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file
  */
-export function clone<T>(originalObject: T): T | null {
-    if (!originalObject) {
-        return null;
-    }
 
-    return JSON.parse(JSON.stringify(originalObject));
-}
+export * from './card-brand-type';
+export * from './card-type';
+export * from './cards.constant';
