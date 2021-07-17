@@ -1,5 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, forwardRef, Injector, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { validateCardNumber } from '@asoftwareworld/card-validator/core';
 import { Subject } from 'rxjs';
@@ -16,16 +16,16 @@ import { cardIcons } from './card-icons';
     }],
     encapsulation: ViewEncapsulation.None
 })
-export class AswCard implements OnInit, ControlValueAccessor {
-    private _value: any;
+export class AswCard implements OnInit, ControlValueAccessor, OnDestroy {
+    private value$: any;
     stateChanges = new Subject<void>();
     onChange: any;
 
     @Input() get value(): string {
-        return this._value;
+        return this.value$;
     }
     set value(cardNumber) {
-        this._value = cardNumber;
+        this.value$ = cardNumber;
         this.onChange(cardNumber);
         this.stateChanges.next();
     }
@@ -40,9 +40,9 @@ export class AswCard implements OnInit, ControlValueAccessor {
 
     constructor(
         private injector: Injector,
-        private elRef: ElementRef<HTMLElement>,
-        private fm: FocusMonitor) {
-        fm.monitor(elRef.nativeElement, true).subscribe(origin => {
+        private elementRef: ElementRef<HTMLElement>,
+        private focusMonitor: FocusMonitor) {
+        focusMonitor.monitor(elementRef.nativeElement, true).subscribe(origin => {
             this.focused = !!origin;
             this.stateChanges.next();
         });
@@ -86,7 +86,7 @@ export class AswCard implements OnInit, ControlValueAccessor {
 
     private prettyCardNumber(card: any, cardNumber: string): string {
         if (card) {
-            const offsets = [0].concat( card.gaps, cardNumber.length);
+            const offsets = [0].concat(card.gaps, cardNumber.length);
             const components = [];
 
             for (let i = 0; offsets[i] < cardNumber.length; i++) {
@@ -104,5 +104,10 @@ export class AswCard implements OnInit, ControlValueAccessor {
             this.onTouched(this.ngControl.control?.value);
             this.ngControl.control?.markAsTouched();
         }
+    }
+
+    ngOnDestroy(): void {
+        this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+        this.stateChanges.complete();
     }
 }
