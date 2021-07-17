@@ -1,7 +1,7 @@
 <input [value]="cardNumber" 
 aswNumbersOnly
     placeholder="Card Number"
-    [aswMaxLength]="maxNumberLimit"
+    [attr.maxlength]="maxNumberLimit"
     (blur)="updateOnTouch()" 
     (input)="updateIcon($event)">
     <img  class="asw-card-suffix" [src]="cardIcon" />

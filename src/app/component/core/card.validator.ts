@@ -1,23 +1,10 @@
-import { CardType, cards } from '@asoftwareworld/card-validator/api';
-
-// export const validateCardNumber = (cardNumber: string): CardType =>
-//     cards.find((card: CardType) => {
-//         // const patterns = card.patterns.map(
-//         //     pattern => new RegExp(`^${pattern}`, 'g')
-//         // );
-//         const matchResult = card.patterns
-//             .map((pattern: [number] | [number[]]) => rawValue.match(pattern))
-//             .filter(result => result);
-
-//         return !!matchResult.length;
-//     }) || null;
+import { cards } from '@asoftwareworld/card-validator/api';
 
 export function validateCardNumber(cardNumber: string): any {
     return cards.find((card: any) => {
         const matchResult = card.patterns
             .map((pattern: number | number[]) => validator(cardNumber, pattern))
             .filter((result: any) => result);
-
         return !!matchResult.length;
     });
 }

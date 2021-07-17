@@ -1,7 +1,6 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl } from '@angular/forms';
-import { CardType } from '@asoftwareworld/card-validator/api';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
 import { validateCardNumber } from '@asoftwareworld/card-validator/core';
 import { Subject } from 'rxjs';
 import { cardIcons } from './card-icons';
@@ -76,10 +75,9 @@ export class AswCard implements OnInit, ControlValueAccessor {
         let cardType = 'default';
         this.onChange(value);
         this.ngControl?.control?.markAsDirty();
-        // this.cardMaskFunction(value);
         const card = validateCardNumber(value);
         if (card) {
-            this.maxNumberLimit = Math.max(...card.length);
+            this.maxNumberLimit = Math.max(...card.length) + card.gaps.length;
             cardType = card.type;
         }
         this.cardNumber = this.prettyCardNumber(card, value);
@@ -103,7 +101,6 @@ export class AswCard implements OnInit, ControlValueAccessor {
 
     updateOnTouch(): void {
         if (this.ngControl) {
-            const value = this.ngControl.control?.value;
             this.onTouched(this.ngControl.control?.value);
             this.ngControl.control?.markAsTouched();
         }
