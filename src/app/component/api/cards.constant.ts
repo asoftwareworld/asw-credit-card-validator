@@ -1,46 +1,11 @@
+/**
+ * @license
+ * Copyright ASW (A Software World) All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file
+ */
 import { CardBrandType, CardSecurityCodeLabel } from './card-brand-type';
-
-// const digitMask = (numDigits: number) => Array(numDigits).fill(/\d/);
-
-// const defaultFormat = /(\d{1,4})/g;
-
-// const defaultMask19 = [
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(3)
-// ];
-
-// const defaultMask16 = [
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(4)
-// ];
-
-// const dinersClubMask = [
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(6),
-//     ' ',
-//     ...digitMask(4)
-// ];
-
-// const amexMask = [
-//     ...digitMask(4),
-//     ' ',
-//     ...digitMask(6),
-//     ' ',
-//     ...digitMask(5)
-// ];
 
 export const cards = Object.freeze([
     {
@@ -148,6 +113,39 @@ export const cards = Object.freeze([
         luhn: false
     },
     {
+        type: CardBrandType.DANKORT,
+        patterns: [5019],
+        gaps: [4, 8, 12],
+        length: [16],
+        code: {
+            securityCodeLabel: CardSecurityCodeLabel.CVV,
+            size: [3],
+        },
+        luhn: true
+    },
+    {
+        type: CardBrandType.HIPER,
+        patterns: [637095, 63737423, 63743358, 637568, 637599, 637609, 637612],
+        gaps: [4, 8, 12],
+        length: [16],
+        code: {
+            securityCodeLabel: CardSecurityCodeLabel.CVC,
+            size: [3],
+        },
+        luhn: true
+    },
+    {
+        type: CardBrandType.HIPERCARD,
+        patterns: [606282],
+        gaps: [4, 8, 12],
+        length: [16],
+        code: {
+            securityCodeLabel: CardSecurityCodeLabel.CVC,
+            size: [3],
+        },
+        luhn: true
+    },
+    {
         type: CardBrandType.MAESTRO,
         patterns: [
             493698,
@@ -216,41 +214,8 @@ export const cards = Object.freeze([
         luhn: true
     },
     {
-        type: CardBrandType.HIPER,
-        patterns: [637095, 63737423, 63743358, 637568, 637599, 637609, 637612],
-        gaps: [4, 8, 12],
-        length: [16],
-        code: {
-            securityCodeLabel: CardSecurityCodeLabel.CVC,
-            size: [3],
-        },
-        luhn: true
-    },
-    {
-        type: CardBrandType.HIPERCARD,
-        patterns: [606282],
-        gaps: [4, 8, 12],
-        length: [16],
-        code: {
-            securityCodeLabel: CardSecurityCodeLabel.CVC,
-            size: [3],
-        },
-        luhn: true
-    },
-    {
         type: CardBrandType.FORBRUGSFORENINGEN,
         patterns: [600],
-        gaps: [4, 8, 12],
-        length: [16],
-        code: {
-            securityCodeLabel: CardSecurityCodeLabel.CVV,
-            size: [3],
-        },
-        luhn: true
-    },
-    {
-        type: CardBrandType.DANKORT,
-        patterns: [5019],
         gaps: [4, 8, 12],
         length: [16],
         code: {

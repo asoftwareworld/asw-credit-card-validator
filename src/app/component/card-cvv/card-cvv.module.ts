@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AswCardCvv } from './card-cvv';
-import { AswNumberOnly } from '@asoftwareworld/card-validator/core';
+import { AswNumberOnly } from '@asoftwareworld/card-validator/common';
 
 @NgModule({
     declarations: [

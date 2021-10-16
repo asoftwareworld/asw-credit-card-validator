@@ -1,9 +1,16 @@
+/**
+ * @license
+ * Copyright ASW (A Software World) All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file
+ */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AswNumberOnly } from '@asoftwareworld/card-validator/core';
+import { MatInputModule } from '@angular/material/input';
+import { AswNumberOnly } from '@asoftwareworld/card-validator/common';
 import { AswCard } from './card';
 
 @NgModule({
@@ -14,12 +21,12 @@ import { AswCard } from './card';
     imports: [
         CommonModule,
         FormsModule,
-        MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatInputModule
     ],
     exports: [
-        AswCard,
-        AswNumberOnly
+        AswNumberOnly,
+        AswCard
     ]
 })
 export class AswCardModule { }

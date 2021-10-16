@@ -1,31 +1,12 @@
-<form class="cc-form" [formGroup]="withoutMaterialForm">
-    <asw-card formControlName="creditCard" name="card"></asw-card>
-    <!-- <div class="form-group">
-        <ngx-cc defaultStyles placeholder="0000 0000 0000 0000" required="true" styleClass="default-input"
-            name="cardNumber" formControlName="creditCardeWithoutMaterial"></ngx-cc>
-        <span
-            *ngIf="withoutMaterialForm.controls.creditCardeWithoutMaterial.invalid && withoutMaterialForm.controls.creditCardeWithoutMaterial.touched">
-            Card number is not valid
-        </span>
-    </div> -->
-    <div class="cc-date-cvv-container space-even">
-        <!-- <div class="form-group">
-            <ngx-cc-date defaultStyles styleClass="default-input" placeholder="MM / YY"
-                formControlName="creditCardDateWithoutMaterial">
-            </ngx-cc-date>
-            <span
-                *ngIf="withoutMaterialForm.controls.creditCardDateWithoutMaterial.invalid && withoutMaterialForm.controls.creditCardDateWithoutMaterial.touched">
-                Expiration date is not valid
-            </span>
-        </div> -->
-        <div class="form-group">
-            <asw-card-cvv defaultStyles styleClass="default-input" placeholder="CVV"
-                formControlName="creditCardCvvWithoutMaterial"></asw-card-cvv>
-            <span
-                *ngIf="withoutMaterialForm.controls.creditCardCvvWithoutMaterial.invalid && withoutMaterialForm.controls.creditCardCvvWithoutMaterial.touched">
-                Security code is not valid
-            </span>
-        </div>
-    </div>
-    <button class="btn-purchase" [disabled]="withoutMaterialForm.invalid">Purchase</button>
+<form [formGroup]="aswCardForm">
+    <mat-form-field appearance="outline" class="asw-full-width">
+        <mat-label>Credit Card Number</mat-label>
+            <asw-card formControlName="creditCard" name="card" [required]="required"></asw-card>
+        <mat-error >
+            <mat-error *ngIf="aswCardForm.invalid">
+                <!-- <mat-icon aria-hidden="false">error</mat-icon>  -->
+                Card number is not valid
+            </mat-error>
+        </mat-error>
+    </mat-form-field>
 </form>

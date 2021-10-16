@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,21 +6,27 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
     title = 'asw-credit-card-validator';
-    withoutMaterialForm: FormGroup;
+    aswCardForm: FormGroup;
     cardNumber = '';
+    required = true;
+    disabled = true;
     constructor(private fb: FormBuilder) {
-        this.withoutMaterialForm = this.fb.group({
-            creditCardCvvWithoutMaterial: [],
+        this.aswCardForm = this.fb.group({
+            // creditCardCvvWithoutMaterial: [],
             creditCard: []
         });
     }
 
-    ngOnInit() {
-        this.withoutMaterialForm = this.fb.group({
-            creditCardCvvWithoutMaterial: [],
+    ngOnInit(): void {
+        this.aswCardForm = this.fb.group({
+            // creditCardCvvWithoutMaterial: [],
             creditCard: []
         });
+    }
+
+    submit(): void{
+        // debugger
     }
 }

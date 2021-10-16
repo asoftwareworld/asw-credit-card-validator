@@ -1,7 +1,17 @@
+/**
+ * @license
+ * Copyright ASW (A Software World) All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file
+ */
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, forwardRef, Injector, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
-import { validateCardNumber } from '@asoftwareworld/card-validator/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, DoCheck, ElementRef, forwardRef, HostBinding, Injector, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, NG_VALIDATORS } from '@angular/forms';
+import { MatFormFieldControl } from '@angular/material/form-field';
+import { CardValidator } from '@asoftwareworld/card-validator/common';
+import { validateCardNumber } from '@asoftwareworld/card-validator/utils';
 import { Subject } from 'rxjs';
 import { cardIcons } from './card-icons';
 
@@ -13,30 +23,90 @@ import { cardIcons } from './card-icons';
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => AswCard),
         multi: true
+    },
+    {
+        provide: NG_VALIDATORS,
+        useValue: CardValidator,
+        multi: true
+    },
+    {
+        provide: MatFormFieldControl,
+        useExisting: forwardRef(() => AswCard),
+        multi: true
     }],
     encapsulation: ViewEncapsulation.None
 })
-export class AswCard implements OnInit, ControlValueAccessor, OnDestroy {
-    private value$: any;
-    stateChanges = new Subject<void>();
-    onChange: any;
+export class AswCard implements OnInit, ControlValueAccessor, MatFormFieldControl<AswCard>, DoCheck, OnDestroy {
 
-    @Input() get value(): string {
+    @Input()
+    get value(): any {
         return this.value$;
     }
+
     set value(cardNumber) {
         this.value$ = cardNumber;
         this.onChange(cardNumber);
         this.stateChanges.next();
     }
 
+    @Input()
+    get required(): boolean {
+        return this.required$;
+    }
+
+    set required(requiredValue: boolean) {
+        this.required$ = coerceBooleanProperty(requiredValue);
+        this.stateChanges.next();
+    }
+
+    @Input()
+    get disabled(): boolean {
+        if (this.ngControl && this.ngControl.disabled !== null) {
+            return this.ngControl.disabled;
+        }
+        return this.disabled$;
+    }
+    set disabled(disabledValue: boolean) {
+        this.disabled$ = coerceBooleanProperty(disabledValue);
+        this.stateChanges.next();
+    }
+
+    @Input()
+    get placeholder(): string {
+        return this.placeholder$;
+    }
+    set placeholder(placeholderValue: string) {
+        this.placeholder$ = placeholderValue;
+        this.stateChanges.next();
+    }
+
+    @Input()
+    get empty(): boolean {
+        const value = this.cardNumber.replace(/\s/g, '');
+        return !(!!value);
+    }
+    static nextId = 0;
+    private value$: any;
+    private required$ = false;
+    private disabled$ = false;
+    private placeholder$!: string;
+
     cardNumber = '';
     onTouched: any;
     focused = false;
     maxNumberLimit = 1;
     cardIcon = cardIcons.default;
-    errorState: boolean | null = false;
+    errorState = false;
     ngControl: NgControl | null = null;
+    stateChanges = new Subject<void>();
+    onChange: any;
+
+    @HostBinding() id = `asw-card${AswCard.nextId}`;
+    @HostBinding('attr.aria-describedByIds') describedByIds = '';
+    @HostBinding('class.floating')
+    get shouldLabelFloat(): boolean {
+        return this.focused || !this.empty;
+    }
 
     constructor(
         private injector: Injector,
@@ -68,6 +138,16 @@ export class AswCard implements OnInit, ControlValueAccessor, OnDestroy {
 
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
+    }
+
+    setDescribedByIds(ids: string[]): void {
+        this.describedByIds = ids.join(' ');
+    }
+
+    onContainerClick(event: MouseEvent): void {
+        if ((event.target as Element).tagName.toLowerCase() !== 'input') {
+            this.elementRef.nativeElement.querySelector('input')?.focus();
+        }
     }
 
     updateIcon(event: Event): void {
@@ -103,6 +183,13 @@ export class AswCard implements OnInit, ControlValueAccessor, OnDestroy {
         if (this.ngControl) {
             this.onTouched(this.ngControl.control?.value);
             this.ngControl.control?.markAsTouched();
+        }
+    }
+
+    ngDoCheck(): void {
+        if (this.ngControl) {
+            this.errorState = (this.ngControl.invalid && this.ngControl.touched) ? true : false;
+            this.stateChanges.next();
         }
     }
 
