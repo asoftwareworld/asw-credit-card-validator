@@ -1,0 +1,24 @@
+.asw-card-input {
+    border: none;
+    background: none;
+    padding: 0;
+    outline: none;
+    font: inherit;
+    text-align: left;
+}
+.asw-card-input-default {
+    background-position: 100%;
+    background-repeat: no-repeat;
+}
+.asw-container {
+    display: flex;
+    position: relative;
+}
+.asw-suffix {
+    position: absolute;
+    top: -0.8rem;
+    right: 0;
+}
+.asw-form-field div.mat-form-field-wrapper div.mat-form-field-flex {
+    align-items: flex-end;
+}

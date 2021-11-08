@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "module": "es2020",
+        "target": "es2015",
+        "baseUrl": ".",
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "outDir": "../build",
+        "rootDir": ".",
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "types": [],
+        "paths": {
+            "@asoftwareworld/card-validator/*": [
+                "src/app/lib/*/public_api"
+            ]
+        }
+    },
+    "angularCompilerOptions": {
+        "enableIvy": false,
+        "annotateForClosureCompiler": false,
+        "strictMetadataEmit": true,
+        "skipTemplateCodegen": true
+    },
+    "files": [
+        "./public_api.ts"
+    ]
+}

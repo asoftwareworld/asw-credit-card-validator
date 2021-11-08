@@ -1,0 +1,13 @@
+<div class="asw-container">
+    <input matInput
+        [value]="cardNumber" 
+        aswNumbersOnly
+        [placeholder]="placeholder"
+        [required]="required"
+        [disabled]="disabled"
+        [attr.maxlength]="maxNumberLimit"
+        class="asw-card-input-default"
+        (blur)="updateOnTouch()"
+        (input)="updateIcon($event)">
+    <img class="asw-suffix" [src]="cardIcon" width="51px" height="32px"/>
+</div>

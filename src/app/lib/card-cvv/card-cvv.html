@@ -1,0 +1,13 @@
+<div class="asw-card-cvv-container" >
+    <input
+        class="asw-card-cvv-input"
+        type="text"
+        [placeholder]="placeholder || ''"
+        [required]="required"
+        [disabled]="disabled"
+        [value]="cardCvv"
+        aswNumbersOnly
+        [attr.maxLength]="maxCvvLength"
+        (blur)="updateOnTouch()"
+        (input)="updateCvv($event)">
+</div>

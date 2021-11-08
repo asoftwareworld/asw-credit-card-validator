@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AswCardCvvModule } from '@asoftwareworld/card-validator/card-cvv';
-import { AswCardModule } from '@asoftwareworld/card-validator/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AswCardModule } from '@asoftwareworld/card-validator/card';
+import { AswCardCvvModule } from '@asoftwareworld/card-validator/card-cvv';
 
 @NgModule({
     declarations: [
