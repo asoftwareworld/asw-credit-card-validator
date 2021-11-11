@@ -5,13 +5,12 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file
  */
-import { FocusMonitor } from '@angular/cdk/a11y';
+import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, DoCheck, ElementRef, forwardRef, HostBinding, Injector, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NgControl, NG_VALIDATORS } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { CardValidator } from '@asoftwareworld/card-validator/common';
-import { CommonUtils, validateCardNumber } from '@asoftwareworld/card-validator/utils';
+import { CardCvvService, CardValidator, validateCardNumber } from '@asoftwareworld/card-validator/common';
 import { Subject } from 'rxjs';
 import { cardIcons } from './card-icons';
 
@@ -94,14 +93,14 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
     cardNumber = '';
     onTouched: any;
     focused = false;
-    maxNumberLimit = 1;
+    maxNumberLimit = 19;
     cardIcon = cardIcons.default;
     errorState = false;
     ngControl: NgControl | null = null;
     stateChanges = new Subject<void>();
     onChange: any;
 
-    @HostBinding() id = `asw-card${AswCard.nextId}`;
+    @HostBinding() id = `asw-card-${AswCard.nextId}`;
     @HostBinding('attr.aria-describedByIds') describedByIds = '';
     @HostBinding('class.floating')
     get shouldLabelFloat(): boolean {
@@ -111,8 +110,9 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
     constructor(
         private injector: Injector,
         private elementRef: ElementRef<HTMLElement>,
-        private focusMonitor: FocusMonitor) {
-        focusMonitor.monitor(elementRef.nativeElement, true).subscribe(origin => {
+        private focusMonitor: FocusMonitor,
+        private cardCvvService: CardCvvService) {
+        focusMonitor.monitor(elementRef.nativeElement, true).subscribe((origin: FocusOrigin) => {
             this.focused = !!origin;
             this.stateChanges.next();
         });
@@ -159,7 +159,7 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         if (card) {
             this.maxNumberLimit = Math.max(...card.length) + card.gaps.length;
             cardType = card.type;
-            CommonUtils.card = card.code;
+            this.cardCvvService.code = card.code;
         }
         this.cardNumber = this.prettyCardNumber(card, value);
         this.cardIcon = !value ? cardIcons.default : cardIcons[cardType];

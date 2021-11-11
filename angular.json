@@ -10,8 +10,8 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
-                        "project": "src/app/component/ng-package.json",
-                        "tsConfig": "src/app/component/tsconfig.lib.json"
+                        "project": "src/app/lib/ng-package.json",
+                        "tsConfig": "src/app/lib/tsconfig.lib.json"
                     }
                 }
             }
@@ -19,7 +19,7 @@
         "asw-credit-card-validator": {
             "projectType": "application",
             "schematics": {
-                "@schematics/angular:component": {
+                "@schematics/angular:lib": {
                     "style": "scss"
                 },
                 "@schematics/angular:application": {

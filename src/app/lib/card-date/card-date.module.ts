@@ -10,13 +10,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AswDirectiveModule, CardCvvValidator } from '@asoftwareworld/card-validator/common';
-import { AswCardCvv } from './card-cvv';
+import { AswDirectiveModule } from '@asoftwareworld/card-validator/common';
+import { AswCardDate } from './card-date';
 
 @NgModule({
     declarations: [
-        AswCardCvv,
-        CardCvvValidator
+        AswCardDate
     ],
     imports: [
         CommonModule,
@@ -26,8 +25,7 @@ import { AswCardCvv } from './card-cvv';
         AswDirectiveModule
     ],
     exports: [
-        AswCardCvv,
-        CardCvvValidator
+        AswCardDate
     ]
 })
-export class AswCardCvvModule { }
+export class AswCardDateModule { }

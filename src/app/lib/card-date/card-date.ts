@@ -14,6 +14,7 @@ import {
     OnDestroy,
     DoCheck,
     forwardRef,
+    ViewEncapsulation,
     ElementRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl } from '@angular/forms';
@@ -21,39 +22,42 @@ import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
-import { CardCvvService, CardCvvValidator } from '@asoftwareworld/card-validator/common';
+import { CardExpirationValidator } from '@asoftwareworld/card-validator/common';
 
 @Component({
-    selector: 'asw-card-cvv',
-    templateUrl: './card-cvv.html',
-    styleUrls: ['./card-cvv.scss'],
+    selector: 'asw-card-date',
+    templateUrl: './card-date.html',
+    styleUrls: ['./card-date.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => AswCardCvv),
+            useExisting: forwardRef(() => AswCardDate),
             multi: true
         },
         {
             provide: NG_VALIDATORS,
-            useExisting: forwardRef(() => CardCvvValidator),
+            useValue: CardExpirationValidator,
             multi: true
         },
         {
             provide: MatFormFieldControl,
-            useExisting: forwardRef(() => AswCardCvv),
+            useExisting: forwardRef(() => AswCardDate),
             multi: true
         }
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
-export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<AswCardCvv> {
+export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<AswCardDate> {
 
+    static nextId = 0;
+    @Input() styleClass!: string;
     @Input()
     get value(): any {
         return this.value$;
     }
-    set value(cardNumber) {
-        this.value$ = cardNumber;
-        this.onChanges(cardNumber);
+    set value(cardDate) {
+        this.value$ = cardDate;
+        this.onChanges(cardDate);
         this.stateChanges.next();
     }
 
@@ -68,7 +72,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
 
     @Input()
     get empty(): boolean {
-        return !(!!this.cardCvv);
+        return !(!!this.cardDate);
     }
 
     @Input()
@@ -92,23 +96,19 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
         this.stateChanges.next();
     }
 
-    static nextId = 0;
-
     private value$: any;
     private placeholder$!: string;
     private disabled$ = false;
     private required$ = false;
-
-    cardCvv = '';
-    onTouched: any;
-    focused = false;
-    maxCvvLength = 4;
-    errorState = false;
     ngControl: NgControl | null = null;
+    focused = false;
+    errorState = false;
     stateChanges = new Subject<void>();
+    cardDate = '';
     onChanges: any;
+    onTouched: any;
 
-    @HostBinding() id = `asw-card-cvv-${AswCardCvv.nextId}`;
+    @HostBinding() id = `asw-card-date-${AswCardDate.nextId}`;
     @HostBinding('attr.aria-describedby') describedBy = '';
     @HostBinding('class.floating')
     get shouldLabelFloat(): boolean {
@@ -118,9 +118,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
     constructor(
         private injector: Injector,
         private elementRef: ElementRef<HTMLElement>,
-        private focusMonitor: FocusMonitor,
-        private cardCvvService: CardCvvService
-    ) {
+        private focusMonitor: FocusMonitor) {
         focusMonitor.monitor(elementRef.nativeElement, true).subscribe((origin: FocusOrigin) => {
             this.focused = !!origin;
             this.stateChanges.next();
@@ -137,10 +135,6 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
     }
 
     ngDoCheck(): void {
-        if (this.cardCvvService.code) {
-            this.maxCvvLength = this.cardCvvService.code.size.length <= 1
-                ? this.cardCvvService.code.size[0] : this.cardCvvService.code.size[1];
-        }
         if (this.ngControl) {
             this.errorState = this.ngControl.invalid && this.ngControl.touched ? true : false;
             this.stateChanges.next();
@@ -149,7 +143,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
 
     writeValue(value: string): void {
         if (value) {
-            this.cardCvv = value;
+            this.cardDate = value;
         }
     }
 
@@ -171,17 +165,20 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
         }
     }
 
-    updateCvv(event: Event): void {
-        const value = (event.target as HTMLInputElement).value;
-        this.cardCvv = value;
-        this.onChanges(value);
-        this.ngControl?.control?.markAsDirty();
+    updateDate(): void {
+        if (this.ngControl) {
+            console.log(this.ngControl.control?.value);
+            this.onChanges(this.ngControl.control?.value);
+            this.ngControl.control?.markAsDirty();
+            this.cardDate = this.ngControl.control?.value;
+        }
     }
 
     updateOnTouch(): void {
         if (this.ngControl) {
             this.onTouched(this.ngControl.control?.value);
             this.ngControl.control?.markAsTouched();
+            this.cardDate = this.ngControl.control?.value;
         }
     }
 

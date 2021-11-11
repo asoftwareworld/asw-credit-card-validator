@@ -6,4 +6,4 @@
  * found in the LICENSE file
  */
 
- export * from './card.module';
+export default {};

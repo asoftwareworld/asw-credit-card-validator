@@ -8,16 +8,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AswNumberOnly } from './number-only';
+import { AswDateFormat } from './date-format';
 
 @NgModule({
     declarations: [
-        AswNumberOnly
+        AswNumberOnly,
+        AswDateFormat
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        AswNumberOnly
+        AswNumberOnly,
+        AswDateFormat
     ]
 })
 export class AswDirectiveModule { }

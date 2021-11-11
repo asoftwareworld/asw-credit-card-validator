@@ -1,0 +1,12 @@
+<div class="asw-card-date-container" [ngClass]="styleClass">
+    <input aswNumberOnly 
+        aswDateFormat 
+        class="asw-card-date-input" 
+        type="text" 
+        [placeholder]="placeholder || ''"
+        [required]="required" 
+        [disabled]="disabled" 
+        [value]="cardDate" 
+        (blur)="updateOnTouch()" 
+        (input)="updateDate()">
+</div>

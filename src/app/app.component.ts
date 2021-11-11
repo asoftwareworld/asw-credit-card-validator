@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright ASW (A Software World) All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -16,7 +24,8 @@ export class AppComponent implements OnInit{
         this.aswCardForm = this.fb.group({
             // creditCardCvvWithoutMaterial: [],
             creditCard: [],
-            cvv: []
+            cvv: [],
+            cardDate: []
         });
     }
 
@@ -24,7 +33,8 @@ export class AppComponent implements OnInit{
         this.aswCardForm = this.fb.group({
             // creditCardCvvWithoutMaterial: [],
             creditCard: [],
-            cvv: []
+            cvv: [],
+            cardDate: []
         });
     }
 

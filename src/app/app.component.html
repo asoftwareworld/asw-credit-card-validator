@@ -20,32 +20,10 @@
         </mat-error>
     </mat-form-field>
     
-    <!-- <div class="form-group">
-        <ngx-cc defaultStyles placeholder="0000 0000 0000 0000" required="true" styleClass="default-input"
-            name="cardNumber" formControlName="creditCardeWithoutMaterial"></ngx-cc>
-        <span
-            *ngIf="withoutMaterialForm.controls.creditCardeWithoutMaterial.invalid && withoutMaterialForm.controls.creditCardeWithoutMaterial.touched">
-            Card number is not valid
-        </span>
-    </div> -->
-    <div class="cc-date-cvv-container space-even">
-        <!-- <div class="form-group">
-            <ngx-cc-date defaultStyles styleClass="default-input" placeholder="MM / YY"
-                formControlName="creditCardDateWithoutMaterial">
-            </ngx-cc-date>
-            <span
-                *ngIf="withoutMaterialForm.controls.creditCardDateWithoutMaterial.invalid && withoutMaterialForm.controls.creditCardDateWithoutMaterial.touched">
-                Expiration date is not valid
-            </span>
-        </div> -->
-        <!-- <div class="form-group">
-            <asw-card-cvv defaultStyles styleClass="default-input" placeholder="CVV"
-                formControlName="creditCardCvvWithoutMaterial"></asw-card-cvv>
-            <span
-                *ngIf="withoutMaterialForm.controls.creditCardCvvWithoutMaterial.invalid && withoutMaterialForm.controls.creditCardCvvWithoutMaterial.touched">
-                Security code is not valid
-            </span>
-        </div> -->
-    </div>
+    <mat-form-field appearance="outline" class="asw-full-width">
+        <mat-label>MM / YY</mat-label>
+        <asw-card-date formControlName="cardDate"></asw-card-date>
+        <mat-error *ngIf="aswCardForm.invalid">Expiration date is not valid</mat-error>
+    </mat-form-field>
     <button class="btn-purchase" [disabled]="aswCardForm.invalid" (click)="submit()">Purchase</button>
 </form>

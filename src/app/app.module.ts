@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright ASW (A Software World) All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file
+ */
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,6 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AswCardModule } from '@asoftwareworld/card-validator/card';
 import { AswCardCvvModule } from '@asoftwareworld/card-validator/card-cvv';
+import { AswCardDateModule } from '@asoftwareworld/card-validator/card-date';
+import { CardCvvService, CardCvvValidator } from '@asoftwareworld/card-validator/common';
 
 @NgModule({
     declarations: [
@@ -20,10 +30,11 @@ import { AswCardCvvModule } from '@asoftwareworld/card-validator/card-cvv';
         ReactiveFormsModule,
         AswCardModule,
         AswCardCvvModule,
+        AswCardDateModule,
         MatFormFieldModule,
         MatInputModule
     ],
-    providers: [],
+    providers: [CardCvvService, CardCvvValidator],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

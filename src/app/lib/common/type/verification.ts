@@ -9,3 +9,8 @@ export type Verification = {
     isValid: boolean;
     isPotentiallyValid: boolean;
 };
+
+export type MonthAndYear = {
+    month: string;
+    year: string;
+};

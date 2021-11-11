@@ -7,8 +7,8 @@
  */
 
 export * from './algo/luhn';
-export * from './directive/number-only';
 export * from './directive/directive.module';
-export * from './type/verification';
-export * from './validator/card-cvv.validator';
+export * from './validator/card-cvv-validator';
 export * from './validator/card-validator';
+export * from './validator/date-validator/card-expiration-validator';
+export * from './service/card-cvv.service';
