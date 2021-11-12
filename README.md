@@ -11,7 +11,7 @@
 ## [Live Demo](https://asoftwareworld.github.io/ASW-Form-Builder/#/)
 
 ## Installation
-Below are some prerequisites before install `Form Builder`.
+Below are some prerequisites before install `Card Validator`.
 
 ### Step 1: Install Angular Material
 Install `Angular Material` by running the following command:
