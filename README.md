@@ -1,12 +1,12 @@
 # ASW Credit Card Validator
 
-[![npm version](https://badge.fury.io/js/%40asoftwareworld%2Fform-builder.svg)](https://www.npmjs.com/package/@asoftwareworld/form-builder)
-[![Build status](https://circleci.com/gh/asoftwareworld/ASW-Form-Builder.svg?style=svg)](https://circleci.com/gh/asoftwareworld/ASW-Form-Builder)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/asoftwareworld/ASW-Form-Builder/blob/master/LICENSE)
+[![npm version](https://badge.fury.io/js/%40asoftwareworld%2Fform-builder.svg)](https://www.npmjs.com/package/@asoftwareworld/card-validator)
+[![Build status](https://circleci.com/gh/asoftwareworld/ASW-Form-Builder.svg?style=svg)](https://circleci.com/gh/asoftwareworld/asw-credit-card-validator)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/asoftwareworld/asw-credit-card-validator/blob/master/LICENSE)
 
 `ASW Credit Card Validator` helps you with rapid development and designed web forms which includes several controls. The key feature of `Form Builder` is to make your content attractive and effective. We can customize our control at run time and preview the same before final submission.
 
-`Form Builder` is compatible with the latest version of Angular and Angular Material. Only a few clicks can create an attractive web form and provide a JSON Schema to render all controls.
+`Credit Card Validator` is compatible with the latest version of Angular and Angular Material. Only a few clicks can create an attractive web form and provide a JSON Schema to render all controls.
 
 ## [Live Demo](https://asoftwareworld.github.io/ASW-Form-Builder/#/)
 
@@ -92,10 +92,10 @@ and Bootstrap [more information](https://getbootstrap.com/docs/4.0/getting-start
 | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | 
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | 
 | Latest ✔                                                                                 | Latest ✔                                                                                    | Latest ✔                                                                                 | Latest ✔                                                                              | Latest ✔                                                                                                                                                                                                    |
-## [Report a bug](https://github.com/asoftwareworld/ASW-Form-Builder/issues)
+## [Report a bug](https://github.com/asoftwareworld/asw-credit-card-validator/issues)
 We use GitHub Issues as the official bug tracker for the ASW Credit Card Validator. Here are some advices for our users that want to report an issue:
 
-1. Make sure that you are using the latest version of the ASW Form Builder.
+1. Make sure that you are using the latest version of the ASW Credit Card Validator.
 2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
 3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
@@ -103,7 +103,7 @@ We use GitHub Issues as the official bug tracker for the ASW Credit Card Validat
 If you have questions or need help please email `asoftwareworld@gmail.com`
 
 ## License
-[MIT](https://github.com/asoftwareworld/ASW-Form-Builder/blob/master/LICENSE)
+[MIT](https://github.com/asoftwareworld/asw-credit-card-validator/blob/main/LICENSE)
 
 ## Social Media
 
