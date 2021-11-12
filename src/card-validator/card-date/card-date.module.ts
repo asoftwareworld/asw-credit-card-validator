@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AswDirectiveModule } from '@asoftwareworld/card-validator/common';
 import { AswCardDate } from './card-date';
+import { AswDirectiveModule } from '@asoftwareworld/card-validator/common';
 
 @NgModule({
     declarations: [

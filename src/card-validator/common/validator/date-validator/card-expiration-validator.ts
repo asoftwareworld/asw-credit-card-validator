@@ -6,7 +6,7 @@
  * found in the LICENSE file
  */
 import { FormControl } from '@angular/forms';
-import { cardExpirationDate } from './card-expiration-date';
+import { cardExpirationDate } from './card-date-expiration';
 
 export const CardExpirationValidator = (control: FormControl) => {
     const date = cardExpirationDate(control.value);

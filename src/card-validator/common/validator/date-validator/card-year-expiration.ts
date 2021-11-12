@@ -19,7 +19,7 @@ function verification(isValid: boolean, isPotentiallyValid: boolean, isCurrentYe
     };
 }
 
-export function cardExpirationYear(
+export function cardYearExpiration(
     value: string | unknown,
     maxElapsedYear = DEFAULT_VALID_NUMBER_OF_YEARS_IN_THE_FUTURE): ExpirationYearVerification {
     let isCurrentYear;

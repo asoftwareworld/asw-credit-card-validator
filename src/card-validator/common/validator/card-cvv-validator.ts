@@ -7,7 +7,7 @@
  */
 import { Directive } from '@angular/core';
 import { AbstractControl, ValidationErrors, Validator } from '@angular/forms';
-import { CardCvvService } from './../service/card-cvv.service';
+import { CardCvvService } from '../service/card-cvv.service';
 
 @Directive({
     selector: '[aswCvvValidator]'

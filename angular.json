@@ -10,8 +10,8 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
-                        "project": "src/app/lib/ng-package.json",
-                        "tsConfig": "src/app/lib/tsconfig.lib.json"
+                        "project": "src/card-validator/ng-package.json",
+                        "tsConfig": "src/card-validator/tsconfig.lib.json"
                     }
                 }
             }

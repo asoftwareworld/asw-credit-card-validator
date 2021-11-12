@@ -22,7 +22,7 @@
         ],
         "paths": {
             "@asoftwareworld/card-validator/*": [
-                "src/app/lib/*/public_api"
+                "src/card-validator/*/public_api"
             ]
         }
     },

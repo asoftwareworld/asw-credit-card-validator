@@ -15,7 +15,7 @@ function verification(isValid: boolean, isPotentiallyValid: boolean, isValidForT
     };
 }
 
-export function cardExpirationMonth(
+export function cardMonthExpiration(
     value: string | unknown
 ): ExpirationMonthVerification {
     const currentMonth = new Date().getMonth() + 1;

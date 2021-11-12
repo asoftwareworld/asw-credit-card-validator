@@ -7,8 +7,8 @@
  */
 
 import { ExpirationDateVerification } from '../../interface/expiration-date-verification';
-import { cardExpirationMonth } from './card-expiration-month';
-import { cardExpirationYear } from './card-expiration-year';
+import { cardMonthExpiration } from './card-month-expiration';
+import { cardYearExpiration } from './card-year-expiration';
 import { parseDate } from './parse-date';
 
 function verification(
@@ -42,8 +42,8 @@ export function cardExpirationDate(
         return verification(false, false, null, null);
     }
 
-    const monthValid = cardExpirationMonth(date.month);
-    const yearValid = cardExpirationYear(date.year, maxElapsedYear);
+    const monthValid = cardMonthExpiration(date.month);
+    const yearValid = cardYearExpiration(date.year, maxElapsedYear);
 
     if (monthValid.isValid) {
         if (yearValid.isCurrentYear) {

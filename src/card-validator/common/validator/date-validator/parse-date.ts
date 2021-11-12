@@ -5,8 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file
  */
-import { MonthAndYear } from './../../type/verification';
-import { cardExpirationYear } from './card-expiration-year';
+import { MonthAndYear } from '../../type/verification';
+import { cardYearExpiration } from './card-year-expiration';
 
 function getNumberOfMonthDigitsInDateString(dateString: string): number {
     const firstCharacter = Number(dateString[0]);
@@ -52,7 +52,7 @@ function getNumberOfMonthDigitsInDateString(dateString: string): number {
     if (firstCharacter === 1) {
         assumedYear = dateString.substr(1);
 
-        return cardExpirationYear(assumedYear).isPotentiallyValid ? 1 : 2;
+        return cardYearExpiration(assumedYear).isPotentiallyValid ? 1 : 2;
     }
 
     /*
