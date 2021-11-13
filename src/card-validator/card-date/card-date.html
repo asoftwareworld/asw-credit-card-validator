@@ -6,7 +6,8 @@
         [placeholder]="placeholder || ''"
         [required]="required" 
         [disabled]="disabled" 
-        [value]="cardDate" 
+        [value]="cardDate"
+        maxlength="7"
         (blur)="updateOnTouch()" 
         (input)="updateDate()">
 </div>

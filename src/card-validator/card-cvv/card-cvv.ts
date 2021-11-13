@@ -102,7 +102,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
     cardCvv = '';
     onTouched: any;
     focused = false;
-    maxCvvLength = 4;
+    cvvMaxlength = 4;
     errorState = false;
     ngControl: NgControl | null = null;
     stateChanges = new Subject<void>();
@@ -138,7 +138,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
 
     ngDoCheck(): void {
         if (this.cardCvvService.code) {
-            this.maxCvvLength = this.cardCvvService.code.size.length <= 1
+            this.cvvMaxlength = this.cardCvvService.code.size.length <= 1
                 ? this.cardCvvService.code.size[0] : this.cardCvvService.code.size[1];
         }
         if (this.ngControl) {

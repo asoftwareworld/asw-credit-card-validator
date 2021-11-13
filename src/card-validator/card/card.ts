@@ -93,7 +93,7 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
     cardNumber = '';
     onTouched: any;
     focused = false;
-    maxNumberLimit = 19;
+    cardMaxlength = 19;
     cardIcon = cardIcons.default;
     errorState = false;
     ngControl: NgControl | null = null;
@@ -157,7 +157,7 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         this.ngControl?.control?.markAsDirty();
         const card = validateCardNumber(value);
         if (card) {
-            this.maxNumberLimit = Math.max(...card.length) + card.gaps.length;
+            this.cardMaxlength = Math.max(...card.length) + card.gaps.length;
             cardType = card.type;
             this.cardCvvService.code = card.code;
         }

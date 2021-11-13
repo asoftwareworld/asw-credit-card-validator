@@ -10,5 +10,5 @@ import { cardExpirationDate } from './card-date-expiration';
 
 export const CardExpirationValidator = (control: FormControl) => {
     const date = cardExpirationDate(control.value);
-    return (date.month && date.year) ? null : { invalidCardDate: true };
+    return (date.isValid && date.month && date.year) ? null : { invalidCardDate: true };
 };
