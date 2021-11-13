@@ -4,9 +4,8 @@
 [![Build status](https://circleci.com/gh/asoftwareworld/ASW-Form-Builder.svg?style=svg)](https://circleci.com/gh/asoftwareworld/asw-credit-card-validator)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/asoftwareworld/asw-credit-card-validator/blob/main/LICENSE)
 
-`ASW Credit Card Validator` helps you with rapid development and designed web forms which includes several controls. The key feature of `Form Builder` is to make your content attractive and effective. We can customize our control at run time and preview the same before final submission.
+`ASW Card Validator` library validate masking and card numbers, with Luhn's algorithm using Angular. Identify card type `VISA`, `Amex`, `Dankort`, `Discover`, `JCB` etc. and then verify the card number, just by looking at the digits and based that it is validate CVV max length and card expiry date.
 
-`Credit Card Validator` is compatible with the latest version of Angular and Angular Material. Only a few clicks can create an attractive web form and provide a JSON Schema to render all controls.
 
 ## [Live Demo](https://asoftwareworld.github.io/ASW-Form-Builder/#/)
 
@@ -21,70 +20,131 @@ ng add @angular/material
 ```
 
 ### Step 2: Install ASW Credit Card Validator
-Install `Form Builder` to set up in the project by running the following command:
+Install `Card Validator` to set up in the project by running the following command:
 ```html
-npm install @asoftwareworld/form-builder
+npm install @asoftwareworld/card-validator
 ```
 
 ### Step 3: Import the component modules
 Import the NgModule for each component you want to use:
 
 ```
-import { FormBuilderModule, PreviewTemplateModule } from '@asoftwareworld/form-builder';
-// ...
-
+import { AswCardModule } from '@asoftwareworld/card-validator/card';
+import { AswCardCvvModule } from '@asoftwareworld/card-validator/card-cvv';
+import { AswCardDateModule } from '@asoftwareworld/card-validator/card-date';
+import { CardCvvService, CardCvvValidator } from '@asoftwareworld/card-validator/common';
+// ...    
 @NgModule({
-  imports: [
+    imports: [
     // shown passing global defaults (optional)
-    FormBuilderModule,
-    PreviewTemplateModule
-    ...
-  ]
-  // ...
+        AswCardModule,
+        AswCardCvvModule,
+        AswCardDateModule
+        ...
+    ],
+    providers: [
+        CardCvvService,
+        CardCvvValidator
+    ]
+    // ...
 })
-export class AppModule {}
+export class AppModule { }
 ```
 
 ## Add a selector to HTML
 In your template, use the component selector:
 ```
-<asw-form-builder (publishClick)="saveJsonData($event)"
-                  (previewClick)="previewTemplate($event)"></asw-form-builder>
-```
-Preview Template, use the component selector in your HTML page:
-```
-<asw-preview-template [formContainer]="jsonData"></asw-preview-template>
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]="aswCardForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field appearance="outline" class="asw-full-width">
+                        <mat-label>Credit Card Number</mat-label>
+                        <asw-card formControlName="creditCard" name="card" [required]="required"></asw-card>
+                        <mat-error *ngIf="aswCardForm.get('creditCard')?.invalid && (aswCardForm.get('creditCard')?.dirty || aswCardForm.get('creditCard')?.touched)">
+                            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.required">
+                                Card number is required.
+                            </mat-error>
+                            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.minlength">
+                                Card number has invalid length.
+                            </mat-error>
+                            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.invalidCardNumber && !aswCardForm.get('creditCard')?.errors?.required && !aswCardForm.get('creditCard')?.errors?.minlength">
+                                Card number is invalid.
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="asw-full-width">
+                        <mat-label>MM / YY</mat-label>
+                        <asw-card-date formControlName="cardDate" [required]="required"></asw-card-date>
+                        <mat-error *ngIf="aswCardForm.get('cardDate')?.invalid && (aswCardForm.get('cardDate')?.dirty || aswCardForm.get('cardDate')?.touched)">
+                            <mat-error *ngIf="aswCardForm.get('cardDate')?.errors?.required">
+                                Card date is required.
+                            </mat-error>
+                            <mat-error *ngIf="aswCardForm.get('cardDate')?.errors?.invalidCardDate && !aswCardForm.get('cardDate')?.errors?.required">
+                                Card expired.
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="asw-full-width">
+                        <mat-label>CVV</mat-label>
+                        <asw-card-cvv formControlName="cvv" name="card" [required]="required"></asw-card-cvv>
+                        <mat-error *ngIf="aswCardForm.get('cvv')?.invalid && (aswCardForm.get('cvv')?.dirty || aswCardForm.get('cvv')?.touched)">
+                            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.required">
+                                CVV is required.
+                            </mat-error>
+                            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.minlength">
+                                Invalid CVV length.
+                            </mat-error>
+                            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.invalidCardCvv && !aswCardForm.get('cvv')?.errors?.required && !aswCardForm.get('cvv')?.errors?.minlength">
+                                CVV is invalid.
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 ```
 
 Define in your component to get published event :
 
 ```
-export class AppComponent {
-  title = 'ASW Form Builder Demo';
-  jsonData:any[]=[];
-  
-  // Publish Template
-  saveJsonData(data: any){
-    //.... 
-    console.log(data);
-    // do something
-  }
-  
-  //Preview Template
-  previewTemplate(data: any){
-    this.jsonData = data;
-  }
+export class AppComponent implements OnInit {
+    aswCardForm!: FormGroup;
+    required = true;
+    disabled = true;
+    constructor(
+        private formBuilder: FormBuilder) { }
+
+    ngOnInit(): void {
+        this.validateFormBuilder();        
+    }
+
+    validateFormBuilder(): void {
+        this.aswCardForm = this.formBuilder.group({
+            creditCard: ['', [Validators.required, Validators.minLength(12)]],
+            cvv: ['', [Validators.required, Validators.minLength(3)]],
+            cardDate: ['', [Validators.required]]
+        });
+    }
 }
 ```
 ## Theme
 Angular Material [more information](https://material.angular.io/components/categories) 
-and Bootstrap [more information](https://getbootstrap.com/docs/4.0/getting-started/theming/)
 
 ## List of Controls available
 | controls        | description                                                                                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | Card            | Headings are defined with the `<h1> to <h6>` tags. Used as a title of the post, template and resume, etc.       |
-| Card CVV        | The autocomplete is a normal text input enhanced by a panel of suggested relevant options as the user types.    |
+| Card CVV        | CVV validation by default test for a numeric string of 4 characters in length. the `maxLength` can be           |                                     | overridden based on card number. The length will be changed 3 to 4 in the case of an American Express card      |                 | which expects a 4 digit                                |
 | Card Date       | Enable native inputs to be used within a form field. The styles such as the underline, floating label.          |
 
 ## Browser Support

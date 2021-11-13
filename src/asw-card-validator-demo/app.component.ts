@@ -8,7 +8,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CardCvvService } from '@asoftwareworld/card-validator/common';
 
 @Component({
     selector: 'asw-root',

@@ -93,7 +93,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
     }
 
     static nextId = 0;
-
+    @Input() inputClass!: string;
     private value$: any;
     private placeholder$!: string;
     private disabled$ = false;

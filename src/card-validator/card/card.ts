@@ -85,6 +85,7 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         return !(!!value);
     }
     static nextId = 0;
+    @Input() inputClass!: string;
     private value$: any;
     private required$ = false;
     private disabled$ = false;

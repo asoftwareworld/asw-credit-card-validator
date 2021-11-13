@@ -11,12 +11,11 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AswCardCvv } from './card-cvv';
-import { AswDirectiveModule, CardCvvValidator } from '@asoftwareworld/card-validator/common';
+import { AswDirectiveModule } from '@asoftwareworld/card-validator/common';
 
 @NgModule({
     declarations: [
-        AswCardCvv,
-        CardCvvValidator
+        AswCardCvv
     ],
     imports: [
         CommonModule,
@@ -26,8 +25,7 @@ import { AswDirectiveModule, CardCvvValidator } from '@asoftwareworld/card-valid
         AswDirectiveModule
     ],
     exports: [
-        AswCardCvv,
-        CardCvvValidator
+        AswCardCvv
     ]
 })
 export class AswCardCvvModule { }

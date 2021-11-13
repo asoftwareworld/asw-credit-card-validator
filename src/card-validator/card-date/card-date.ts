@@ -50,7 +50,7 @@ import { CardExpirationValidator } from '@asoftwareworld/card-validator/common';
 export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<AswCardDate> {
 
     static nextId = 0;
-    @Input() styleClass!: string;
+    @Input() inputClass!: string;
     @Input()
     get value(): any {
         return this.value$;

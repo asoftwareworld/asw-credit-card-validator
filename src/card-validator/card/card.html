@@ -6,6 +6,7 @@
         [required]="required"
         [disabled]="disabled"
         [attr.maxlength]="cardMaxlength"
+        [ngClass]="inputClass"
         class="asw-card-input-default"
         (blur)="updateOnTouch()"
         (input)="updateIcon($event)">

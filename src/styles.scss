@@ -2,3 +2,8 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.inputclass {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: .5rem !important;
+  }
