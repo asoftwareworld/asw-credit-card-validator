@@ -4,7 +4,7 @@
 [![Build status](https://circleci.com/gh/asoftwareworld/ASW-Form-Builder.svg?style=svg)](https://circleci.com/gh/asoftwareworld/asw-credit-card-validator)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/asoftwareworld/asw-credit-card-validator/blob/main/LICENSE)
 
-`ASW Card Validator` library validate masking and card numbers, with Luhn's algorithm using Angular. Identify card type `VISA`, `Amex`, `Dankort`, `Discover`, `JCB` etc. and then verify the card number, just by looking at the digits and based that it is validate CVV max length and card expiry date.
+`ASW Card Validator` library validate masking and card numbers, with the help of Luhn's algorithm using Angular. Identify card type `VISA`, `Amex`, `China UnionPay`, `Dankort`,  `Diners`,  `Discover`, `Elo`, `Hipercard`, `JCB`, `Maestro` and `Mastercard` and then verify the card number, based on digits.
 
 
 ## [Live Demo](https://asoftwareworld.github.io/ASW-Form-Builder/#/)
@@ -143,9 +143,9 @@ Angular Material [more information](https://material.angular.io/components/categ
 ## List of Controls available
 | controls        | description                                                                                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
-| Card            | Headings are defined with the `<h1> to <h6>` tags. Used as a title of the post, template and resume, etc.       |
-| Card CVV        | CVV validation by default test for a numeric string of 4 characters in length. the `maxLength` can be           |                                     | overridden based on card number. The length will be changed 3 to 4 in the case of an American Express card      |                 | which expects a 4 digit                                |
-| Card Date       | Enable native inputs to be used within a form field. The styles such as the underline, floating label.          |
+| Card            | Card validator validate masking and card numbers, with the help of Luhn's algorithm. Identify card type, `VISA`, `Amex`, `China UnionPay`, `Dankort`,  `Diners`,  `Discover`, `Elo`, `Hipercard`, `JCB`, `Maestro` and `Mastercard` and then verify the card number, just by looking at the digits      |
+| Card CVV        | CVV validation by default test for a numeric string of 4 characters in length. The `maxLength` can be overridden based on card number. The length will be changed 3 to 4 in the case of an American Express card which expects a 4 digit.                                                                                        |
+| Card Date       | Card month accepts 1 or 2 digit months. `1`, `01`, `10` are valid month. Year accepts 2 digit only. `21`, `22` is valid year. The maxElapsedYear parameter determines how many years in the future a card's expiration date should be considered valid. It has a default value of 19, so cards with an expiration date 20 or more years in the future would not be considered valid. It can be overridden by passing in an integer as a second argument.          |
 
 ## Browser Support
 
