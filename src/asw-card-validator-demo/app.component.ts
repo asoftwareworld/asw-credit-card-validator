@@ -7,38 +7,39 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CardCvvService } from '@asoftwareworld/card-validator/common';
 
 @Component({
     selector: 'asw-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
     title = 'asw-credit-card-validator';
     aswCardForm: FormGroup;
     cardNumber = '';
     required = true;
     disabled = true;
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder) {
         this.aswCardForm = this.fb.group({
-            // creditCardCvvWithoutMaterial: [],
-            creditCard: [],
-            cvv: [],
-            cardDate: []
+            creditCard: ['', [Validators.required]],
+            cvv: ['', [Validators.required]],
+            cardDate: ['', [Validators.required]]
         });
     }
 
     ngOnInit(): void {
         this.aswCardForm = this.fb.group({
-            // creditCardCvvWithoutMaterial: [],
-            creditCard: [],
-            cvv: [],
-            cardDate: []
+            creditCard: ['', [Validators.required, Validators.minLength(12)]],
+            cvv: ['', [Validators.required, Validators.minLength(3)]],
+            cardDate: ['', [Validators.required]]
         });
     }
 
-    submit(): void{
+    submit(): void {
         // debugger
     }
 }
+

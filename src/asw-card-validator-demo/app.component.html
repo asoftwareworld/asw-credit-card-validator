@@ -1,29 +1,46 @@
 <form [formGroup]="aswCardForm">
     <mat-form-field appearance="outline" class="asw-full-width">
         <mat-label>Credit Card Number</mat-label>
-            <asw-card formControlName="creditCard" name="card" [required]="required"></asw-card>
-        <mat-error >
-            <mat-error *ngIf="aswCardForm.invalid">
-                <!-- <mat-icon aria-hidden="false">error</mat-icon>  -->
-                Card number is not valid
+        <asw-card formControlName="creditCard" name="card" [required]="required"></asw-card>
+        <mat-error *ngIf="aswCardForm.get('creditCard')?.invalid && (aswCardForm.get('creditCard')?.dirty || aswCardForm.get('creditCard')?.touched)">
+            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.required">
+                Card number is required.
+            </mat-error>
+            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.minlength">
+                Card number has invalid length.
+            </mat-error>
+            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.invalidCardNumber && !aswCardForm.get('creditCard')?.errors?.required && !aswCardForm.get('creditCard')?.errors?.minlength">
+                Card number is invalid.
             </mat-error>
         </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="asw-full-width">
         <mat-label>CVV</mat-label>
-            <asw-card-cvv formControlName="cvv" name="card" [required]="required"></asw-card-cvv>
-        <mat-error >
-            <mat-error *ngIf="aswCardForm.invalid">
-                <!-- <mat-icon aria-hidden="false">error</mat-icon>  -->
-                Security code is not valid
+        <asw-card-cvv formControlName="cvv" name="card" [required]="required"></asw-card-cvv>
+        <mat-error *ngIf="aswCardForm.get('cvv')?.invalid && (aswCardForm.get('cvv')?.dirty || aswCardForm.get('cvv')?.touched)">
+            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.required">
+                CVV is required.
+            </mat-error>
+            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.minlength">
+                Invalid CVV length.
+            </mat-error>
+            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.invalidCardCvv && !aswCardForm.get('cvv')?.errors?.required && !aswCardForm.get('cvv')?.errors?.minlength">
+                CVV is invalid.
             </mat-error>
         </mat-error>
     </mat-form-field>
-    
+
     <mat-form-field appearance="outline" class="asw-full-width">
         <mat-label>MM / YY</mat-label>
         <asw-card-date formControlName="cardDate"></asw-card-date>
-        <mat-error *ngIf="aswCardForm.invalid">Expiration date is not valid</mat-error>
+        <mat-error *ngIf="aswCardForm.get('cardDate')?.invalid && (aswCardForm.get('cardDate')?.dirty || aswCardForm.get('cardDate')?.touched)">
+            <mat-error *ngIf="aswCardForm.get('cardDate')?.errors?.required">
+                Card date is required.
+            </mat-error>
+            <mat-error *ngIf="aswCardForm.get('cardDate')?.errors?.invalidCardDate && !aswCardForm.get('cardDate')?.errors?.required">
+                Card expired.
+            </mat-error>
+        </mat-error>
     </mat-form-field>
-    <button class="btn-purchase" [disabled]="aswCardForm.invalid" (click)="submit()">Purchase</button>
+    <button class="btn-purchase" (click)="submit()">Purchase</button>
 </form>
