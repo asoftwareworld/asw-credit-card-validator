@@ -140,8 +140,17 @@ export class AppComponent implements OnInit {
 ## Theme
 Angular Material [more information](https://material.angular.io/components/categories) 
 
-## List of Controls available
-| controls        | description                                                                                                     |
+
+## List of Input parameters
+| Input parameters        | Description                                                                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------- |
+| placeholder          | The placeholder is text shown when the label is floating but the input is empty.       |
+| required  (optional)   | User must specify a value for the input is required or not.    |
+| disabled (optional)         | User must specify the input is disabled or not.|
+
+
+## List of Components
+| Components        | Description                                                                                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | Card            | Card validator validates masking and card numbers, with the help of Luhn's algorithm. Identify card type, `VISA`, `Amex`, `China UnionPay`, `Dankort`,  `Diners`,  `Discover`, `Elo`, `Hipercard`, `JCB`, `Maestro`, and `Mastercard` and then verify the card number, just by looking at the digits      |
 | Card CVV        | CVV validation by default test for a numeric string of 4 characters in length. The `maxLength` can be overridden based on card number. The length will be changed 3 to 4 in the case of an American Express card which expects a 4 digit.                                                                                        |
