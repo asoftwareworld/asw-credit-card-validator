@@ -4,15 +4,15 @@
     "author": "Anish Sharma",
     "license": "MIT",
     "peerDependencies": {
-        "@angular/common": "~11.2.8",
-        "@angular/core": "~11.2.8",
-        "@angular/cdk": "^11.2.7",
-        "@angular/material": "^11.2.7"
+        "@angular/common": ">=8.0.0",
+        "@angular/core": ">=8.0.0"
     },
     "dependencies": {
+        "@angular/cdk": ">=8.0.0",
+        "@angular/material": ">=8.0.0",
         "tslib": "^2.0.0"
     },
-    "description": "ASW Form Builder helps you with rapid development and designed web forms which includes several controls. The key feature of Form Builder is to make your content attractive and effective. We can customize our control at run time and preview the same before final submission.",
+    "description": "`ASW Card Validator` library validates masking and card numbers, with the help of Luhn's algorithm using Angular. Identify card type `VISA`, `Amex`, `China UnionPay`, `Dankort`,  `Diners`,  `Discover`, `Elo`, `Hipercard`, `JCB`, `Maestro`, and `Mastercard` and then verify the card number, based on digits.",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -24,9 +24,6 @@
         "angular",
         "material",
         "typescript",
-        "form",
-        "resume",
-        "builder",
         "credit card",
         "validator",
         "asw",

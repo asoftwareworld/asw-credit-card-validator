@@ -3,6 +3,7 @@
     "dest": "../../dist",
     "deleteDestPath": true,
     "allowedNonPeerDependencies": [
+        "@angular/cdk",
         "@angular/material"
     ],
     "lib": {
