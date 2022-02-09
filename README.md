@@ -1,6 +1,6 @@
 # ASW Credit Card Validator
 
-[![npm version](https://badge.fury.io/js/%40asoftwareworld%2Fform-builder.svg)](https://www.npmjs.com/package/@asoftwareworld/card-validator)
+[![npm version](https://badge.fury.io/js/%40asoftwareworld%2Fcard-validator.svg)](https://www.npmjs.com/package/@asoftwareworld/card-validator)
 [![Build status](https://circleci.com/gh/asoftwareworld/ASW-Form-Builder.svg?style=svg)](https://circleci.com/gh/asoftwareworld/asw-credit-card-validator)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/asoftwareworld/asw-credit-card-validator/blob/main/LICENSE)
 
