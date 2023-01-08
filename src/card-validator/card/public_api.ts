@@ -7,4 +7,5 @@
  */
 
 export * from './card';
+export * from './card-icons';
 export * from './card.module';

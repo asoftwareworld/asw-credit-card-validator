@@ -13,7 +13,9 @@ import { Verification } from '../type/verification';
     providedIn: 'root'
 })
 export class CardCvvService {
-    public code: any;
+    code: any;
+    cardNumber: any;
+    cardIcon: any;
     private defaultLength = 3;
 
     cvv(value: string | unknown, maxLength: number | number[] = this.defaultLength): Verification {

@@ -164,6 +164,8 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         }
         this.cardNumber = this.prettyCardNumber(card, value);
         this.cardIcon = !value ? cardIcons.default : cardIcons[cardType];
+        this.cardCvvService.cardNumber = this.cardNumber;
+        this.cardCvvService.cardIcon = this.cardIcon;
     }
 
     private prettyCardNumber(card: any, cardNumber: string): string {
