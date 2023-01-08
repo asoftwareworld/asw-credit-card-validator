@@ -57,58 +57,50 @@ In your template, use the component selector:
 <div class="row">
     <div class="col-md-6">
         <form [formGroup]="aswCardForm">
-            <div class="row">
-                <div class="col-md-12">
-                    <mat-form-field appearance="outline" class="asw-full-width">
-                        <mat-label>Credit Card Number</mat-label>
-                        <asw-card formControlName="creditCard" name="card" [required]="required"></asw-card>
-                        <mat-error *ngIf="aswCardForm.get('creditCard')?.invalid && (aswCardForm.get('creditCard')?.dirty || aswCardForm.get('creditCard')?.touched)">
-                            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.required">
-                                Card number is required.
-                            </mat-error>
-                            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.minlength">
-                                Card number has invalid length.
-                            </mat-error>
-                            <mat-error *ngIf="aswCardForm.get('creditCard')?.errors?.invalidCardNumber && !aswCardForm.get('creditCard')?.errors?.required && !aswCardForm.get('creditCard')?.errors?.minlength">
-                                Card number is invalid.
-                            </mat-error>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <mat-form-field appearance="outline" class="asw-full-width">
-                        <mat-label>MM / YY</mat-label>
-                        <asw-card-date formControlName="cardDate" [required]="required"></asw-card-date>
-                        <mat-error *ngIf="aswCardForm.get('cardDate')?.invalid && (aswCardForm.get('cardDate')?.dirty || aswCardForm.get('cardDate')?.touched)">
-                            <mat-error *ngIf="aswCardForm.get('cardDate')?.errors?.required">
-                                Card date is required.
-                            </mat-error>
-                            <mat-error *ngIf="aswCardForm.get('cardDate')?.errors?.invalidCardDate && !aswCardForm.get('cardDate')?.errors?.required">
-                                Card expired.
-                            </mat-error>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                    <mat-form-field appearance="outline" class="asw-full-width">
-                        <mat-label>CVV</mat-label>
-                        <asw-card-cvv formControlName="cvv" name="card" [required]="required"></asw-card-cvv>
-                        <mat-error *ngIf="aswCardForm.get('cvv')?.invalid && (aswCardForm.get('cvv')?.dirty || aswCardForm.get('cvv')?.touched)">
-                            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.required">
-                                CVV is required.
-                            </mat-error>
-                            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.minlength">
-                                Invalid CVV length.
-                            </mat-error>
-                            <mat-error *ngIf="aswCardForm.get('cvv')?.errors?.invalidCardCvv && !aswCardForm.get('cvv')?.errors?.required && !aswCardForm.get('cvv')?.errors?.minlength">
-                                CVV is invalid.
-                            </mat-error>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div>
+            <mat-form-field appearance="outline" class="asw-full-width">
+                <mat-label>Credit Card Number</mat-label>
+                <asw-card formControlName="creditCard" name="card" [required]="required"></asw-card>
+                <mat-error *ngIf="aswCardForm.get('creditCard')?.invalid && (aswCardForm.get('creditCard')?.dirty || aswCardForm.get('creditCard')?.touched)">
+                    <ng-container *ngIf="aswCardForm.get('creditCard')?.errors?.required">
+                        Card number is required.
+                    </ng-container>
+                    <ng-container *ngIf="aswCardForm.get('creditCard')?.errors?.minlength">
+                        Card number has invalid length.
+                    </ng-container>
+                    <ng-container *ngIf="aswCardForm.get('creditCard')?.errors?.invalidCardNumber && !aswCardForm.get('creditCard')?.errors?.required && !aswCardForm.get('creditCard')?.errors?.minlength">
+                        Card number is invalid.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="asw-full-width">
+                <mat-label>CVV</mat-label>
+                <asw-card-cvv formControlName="cvv" name="card" [required]="required"></asw-card-cvv>
+                <mat-error *ngIf="aswCardForm.get('cvv')?.invalid && (aswCardForm.get('cvv')?.dirty || aswCardForm.get('cvv')?.touched)">
+                    <ng-container *ngIf="aswCardForm.get('cvv')?.errors?.required">
+                        CVV is required.
+                    </ng-container>
+                    <ng-container *ngIf="aswCardForm.get('cvv')?.errors?.minlength">
+                        Invalid CVV length.
+                    </ng-container>
+                    <ng-container *ngIf="aswCardForm.get('cvv')?.errors?.invalidCardCvv && !aswCardForm.get('cvv')?.errors?.required && !aswCardForm.get('cvv')?.errors?.minlength">
+                        CVV is invalid.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="asw-full-width">
+                <mat-label>MM / YY</mat-label>
+                <asw-card-date formControlName="cardDate" [required]="required"></asw-card-date>
+                <mat-error *ngIf="aswCardForm.get('cardDate')?.invalid && (aswCardForm.get('cardDate')?.dirty || aswCardForm.get('cardDate')?.touched)">
+                    <ng-container *ngIf="aswCardForm.get('cardDate')?.errors?.required">
+                        Card date is required.
+                    </ng-container>
+                    <ng-container *ngIf="aswCardForm.get('cardDate')?.errors?.invalidCardDate && !aswCardForm.get('cardDate')?.errors?.required">
+                        Card expired.
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+            <button class="btn-purchase" (click)="submit()">Purchase</button>
         </form>
     </div>
 </div>

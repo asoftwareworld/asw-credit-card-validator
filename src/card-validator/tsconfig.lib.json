@@ -1,32 +1,33 @@
 {
     "compilerOptions": {
-      "declaration": true,
-      "module": "es2020",
-      "target": "ES2022",
-      "baseUrl": ".",
-      "stripInternal": true,
-      "experimentalDecorators": true,
-      "moduleResolution": "node",
-      "outDir": "../build",
-      "rootDir": ".",
-      "lib": [
-        "es2018",
-        "dom"
-      ],
-      "skipLibCheck": true,
-      "types": [],
-      "paths": {
-        "@asoftwareworld/card-validator/*": [
-          "src/card-validator/*/public_api"
-        ]
-      },
-      "useDefineForClassFields": false
+        "declaration": true,
+        "module": "es2020",
+        "target": "ES2022",
+        "baseUrl": ".",
+        "stripInternal": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "outDir": "../build",
+        "rootDir": ".",
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "types": [],
+        "paths": {
+            "@asoftwareworld/card-validator/*": [
+                "src/card-validator/*/public_api"
+            ]
+        },
+        "useDefineForClassFields": false
     },
     "angularCompilerOptions": {
         "enableIvy": false,
         "annotateForClosureCompiler": false,
         "strictMetadataEmit": true,
-        "skipTemplateCodegen": true
+        "skipTemplateCodegen": true,
+        "compilationMode": "partial"
     },
     "files": [
         "./public_api.ts"
