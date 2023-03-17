@@ -1,16 +1,16 @@
 {
     "name": "@asoftwareworld/card-validator",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": "Anish Sharma",
     "license": "MIT",
     "peerDependencies": {
-        "@angular/common": "15.0.4",
-        "@angular/core": "15.0.4"
+        "@angular/common": "^15.2.3",
+        "@angular/core": "^15.2.3"
     },
     "dependencies": {
-        "@angular/cdk": "15.0.4",
-        "@angular/material": "15.0.4",
-        "tslib": "^2.0.0"
+        "@angular/cdk": "^15.2.3",
+        "@angular/material": "^15.2.3",
+        "tslib": "^2.3.0"
     },
     "description": "`ASW Card Validator` library validates masking and card numbers, with the help of Luhn's algorithm using Angular. Identify card type `VISA`, `Amex`, `China UnionPay`, `Dankort`,  `Diners`,  `Discover`, `Elo`, `Hipercard`, `JCB`, `Maestro`, and `Mastercard` and then verify the card number, based on digits.",
     "scripts": {
@@ -27,7 +27,10 @@
         "credit card",
         "validator",
         "asw",
-        "asoftwareworld"
+        "asoftwareworld",
+        "aswcarddate",
+        "aswcardcvv",
+        "aswcard"
     ],
     "bugs": {
         "url": "https://github.com/asoftwareworld/asw-credit-card-validator/issues"
