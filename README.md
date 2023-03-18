@@ -1,4 +1,4 @@
-<h1 align="center">ASW Credit Card Validator - customizable design and logos.</h1>
+<h1 align="center">ASW Credit Card Validator - validate card numbers.</h1>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/69723522/225834944-8ea6f27d-d02a-4903-91c3-bc97f9209251.svg" alt="asw-logo" width="310px" height="100px"/>
@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://asoftwareworld.com/#/product/qr-code"><strong>ASW credit card validator demo</strong></a>
+  <a href="https://asoftwareworld.com/#/product/card-validator"><strong>ASW credit card validator demo</strong></a>
   <br>
 </p>
 
