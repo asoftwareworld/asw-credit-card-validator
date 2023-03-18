@@ -16,13 +16,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
     title = 'asw-credit-card-validator';
-    aswCardForm: FormGroup;
+    aswMatCardForm: FormGroup;
+    aswBootstrapCardForm: FormGroup;
     cardNumber = '';
     required = true;
     disabled = true;
     constructor(
         private fb: FormBuilder) {
-        this.aswCardForm = this.fb.group({
+        this.aswMatCardForm = this.fb.group({
+            creditCard: ['', [Validators.required]],
+            cvv: ['', [Validators.required]],
+            cardDate: ['', [Validators.required]]
+        });
+        this.aswBootstrapCardForm = this.fb.group({
             creditCard: ['', [Validators.required]],
             cvv: ['', [Validators.required]],
             cardDate: ['', [Validators.required]]
@@ -30,7 +36,12 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.aswCardForm = this.fb.group({
+        this.aswMatCardForm = this.fb.group({
+            creditCard: ['', [Validators.required, Validators.minLength(12)]],
+            cvv: ['', [Validators.required, Validators.minLength(3)]],
+            cardDate: ['', [Validators.required]]
+        });
+        this.aswBootstrapCardForm = this.fb.group({
             creditCard: ['', [Validators.required, Validators.minLength(12)]],
             cvv: ['', [Validators.required, Validators.minLength(3)]],
             cardDate: ['', [Validators.required]]

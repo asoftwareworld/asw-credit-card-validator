@@ -13,12 +13,12 @@ import {
     OnInit,
     OnDestroy,
     DoCheck,
-    forwardRef,
-    ElementRef
+    ElementRef,
+    forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl } from '@angular/forms';
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
 import { CardCvvService, CardCvvValidator } from '@asoftwareworld/card-validator/common';
@@ -35,17 +35,26 @@ import { CardCvvService, CardCvvValidator } from '@asoftwareworld/card-validator
         },
         {
             provide: NG_VALIDATORS,
-            useExisting: forwardRef(() => CardCvvValidator),
+            useExisting: CardCvvValidator,
             multi: true
         },
         {
             provide: MatFormFieldControl,
-            useExisting: forwardRef(() => AswCardCvv),
+            useExisting: AswCardCvv,
             multi: true
         }
     ]
 })
 export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<AswCardCvv> {
+    static nextId = 0;
+    cardCvv = '';
+    onTouched: any;
+    focused = false;
+    cvvMaxlength = 4;
+    errorState = false;
+    ngControl: NgControl | null = null;
+    stateChanges = new Subject<void>();
+    onChanges: any;
 
     @Input()
     get value(): any {
@@ -56,6 +65,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
         this.onChanges(cardNumber);
         this.stateChanges.next();
     }
+    private value$: any;
 
     @Input()
     get placeholder(): string {
@@ -65,6 +75,7 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
         this.placeholder$ = placeholder;
         this.stateChanges.next();
     }
+    private placeholder$!: string;
 
     @Input()
     get empty(): boolean {
@@ -75,10 +86,11 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
     get required(): boolean {
         return this.required$;
     }
-    set required(req: boolean) {
+    set required(req: BooleanInput) {
         this.required$ = coerceBooleanProperty(req);
         this.stateChanges.next();
     }
+    private required$ = false;
 
     @Input()
     get disabled(): boolean {
@@ -87,26 +99,13 @@ export class AswCardCvv implements OnInit, OnDestroy, DoCheck, ControlValueAcces
         }
         return this.disabled$;
     }
-    set disabled(dis: boolean) {
-        this.disabled$ = coerceBooleanProperty(dis);
+    set disabled(value: BooleanInput) {
+        this.disabled$ = coerceBooleanProperty(value);
         this.stateChanges.next();
     }
-
-    static nextId = 0;
-    @Input() inputClass!: string;
-    private value$: any;
-    private placeholder$!: string;
     private disabled$ = false;
-    private required$ = false;
 
-    cardCvv = '';
-    onTouched: any;
-    focused = false;
-    cvvMaxlength = 4;
-    errorState = false;
-    ngControl: NgControl | null = null;
-    stateChanges = new Subject<void>();
-    onChanges: any;
+    @Input() aswInputClass?: string;
 
     @HostBinding() id = `asw-card-cvv-${AswCardCvv.nextId}`;
     @HostBinding('attr.aria-describedby') describedBy = '';

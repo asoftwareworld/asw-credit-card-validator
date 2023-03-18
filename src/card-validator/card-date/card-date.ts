@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl } from '@angular/forms';
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
 import { CardExpirationValidator } from '@asoftwareworld/card-validator/common';
@@ -41,16 +41,23 @@ import { CardExpirationValidator } from '@asoftwareworld/card-validator/common';
         },
         {
             provide: MatFormFieldControl,
-            useExisting: forwardRef(() => AswCardDate),
+            useExisting: AswCardDate,
             multi: true
         }
     ],
     encapsulation: ViewEncapsulation.None
 })
 export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<AswCardDate> {
-
     static nextId = 0;
-    @Input() inputClass!: string;
+    ngControl: NgControl | null = null;
+    focused = false;
+    errorState = false;
+    stateChanges = new Subject<void>();
+    cardDate = '';
+    onChanges: any;
+    onTouched: any;
+
+    @Input() aswInputClass?: string;
     @Input()
     get value(): any {
         return this.value$;
@@ -60,6 +67,7 @@ export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAcce
         this.onChanges(cardDate);
         this.stateChanges.next();
     }
+    private value$: any;
 
     @Input()
     get placeholder(): string {
@@ -69,6 +77,7 @@ export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAcce
         this.placeholder$ = placeholder;
         this.stateChanges.next();
     }
+    private placeholder$!: string;
 
     @Input()
     get empty(): boolean {
@@ -79,10 +88,11 @@ export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAcce
     get required(): boolean {
         return this.required$;
     }
-    set required(req: boolean) {
+    set required(req: BooleanInput) {
         this.required$ = coerceBooleanProperty(req);
         this.stateChanges.next();
     }
+    private required$ = false;
 
     @Input()
     get disabled(): boolean {
@@ -91,22 +101,11 @@ export class AswCardDate implements OnInit, OnDestroy, DoCheck, ControlValueAcce
         }
         return this.disabled$;
     }
-    set disabled(dis: boolean) {
-        this.disabled$ = coerceBooleanProperty(dis);
+    set disabled(value: BooleanInput) {
+        this.disabled$ = coerceBooleanProperty(value);
         this.stateChanges.next();
     }
-
-    private value$: any;
-    private placeholder$!: string;
     private disabled$ = false;
-    private required$ = false;
-    ngControl: NgControl | null = null;
-    focused = false;
-    errorState = false;
-    stateChanges = new Subject<void>();
-    cardDate = '';
-    onChanges: any;
-    onTouched: any;
 
     @HostBinding() id = `asw-card-date-${AswCardDate.nextId}`;
     @HostBinding('attr.aria-describedby') describedBy = '';

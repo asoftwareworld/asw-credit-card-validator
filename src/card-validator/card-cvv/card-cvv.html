@@ -1,12 +1,12 @@
-<div class="asw-card-cvv-container" >
+<div class="asw-card-cvv-container">
     <input
-        class="asw-card-cvv-input"
         type="text"
+        matInput
         [placeholder]="placeholder || ''"
         [required]="required"
         [disabled]="disabled"
         [value]="cardCvv"
-        [ngClass]="inputClass"
+        [ngClass]="aswInputClass"
         aswNumbersOnly
         [attr.maxlength]="cvvMaxlength"
         (blur)="updateOnTouch()"

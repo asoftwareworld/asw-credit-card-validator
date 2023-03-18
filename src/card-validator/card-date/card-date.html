@@ -1,13 +1,13 @@
 <div class="asw-card-date-container">
     <input aswNumberOnly 
-        aswDateFormat 
-        class="asw-card-date-input" 
-        type="text" 
+        aswDateFormat
+        type="text"
+        matInput 
         [placeholder]="placeholder || ''"
         [required]="required" 
         [disabled]="disabled" 
         [value]="cardDate"
-        [ngClass]="inputClass"
+        [ngClass]="aswInputClass"
         maxlength="7"
         (blur)="updateOnTouch()" 
         (input)="updateDate()">

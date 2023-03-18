@@ -1,14 +1,31 @@
 <div class="asw-container">
-    <input matInput
-        [value]="cardNumber" 
-        aswNumbersOnly
-        [placeholder]="placeholder"
-        [required]="required"
-        [disabled]="disabled"
-        [attr.maxlength]="cardMaxlength"
-        [ngClass]="inputClass"
-        class="asw-card-input-default"
-        (blur)="updateOnTouch()"
-        (input)="updateIcon($event)">
-    <img class="asw-suffix" [src]="cardIcon" width="51px" height="32px"/>
+    <ng-container *ngIf="!aswDefaultStyles; else simpleInput">
+        <input matInput
+            [value]="cardNumber" 
+            aswNumbersOnly
+            type="text"
+            [placeholder]="placeholder"
+            [ngClass]="aswInputClass"
+            [required]="required"
+            [disabled]="disabled"
+            [attr.maxlength]="cardMaxlength"
+            (blur)="updateOnTouch()"
+            (input)="updateIcon($event)">
+        <img class="asw-suffix" [src]="cardIcon" width="51px" height="32px"/>
+    </ng-container>
+    <ng-template #simpleInput>
+        <input matInput
+            [value]="cardNumber" 
+            aswNumbersOnly
+            type="text"
+            class="asw-card-input-default"
+            [placeholder]="placeholder"
+            [required]="required"
+            [ngClass]="aswInputClass"
+            [disabled]="disabled"
+            [attr.maxlength]="cardMaxlength"
+            [ngStyle]="{'background-image': 'url(' + cardIcon + ')'}"
+            (blur)="updateOnTouch()"
+            (input)="updateIcon($event)">
+    </ng-template>    
 </div>

@@ -6,8 +6,20 @@
  * found in the LICENSE file
  */
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, DoCheck, ElementRef, forwardRef, HostBinding, Injector, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+    Component,
+    DoCheck,
+    ElementRef,
+    HostBinding,
+    Injector,
+    Input,
+    OnDestroy,
+    OnInit,
+    ViewEncapsulation,
+    forwardRef
+} from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 import { NG_VALUE_ACCESSOR, NgControl, NG_VALIDATORS } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { CardCvvService, CardValidator, validateCardNumber } from '@asoftwareworld/card-validator/common';
@@ -30,12 +42,28 @@ import { cardIcons } from './card-icons';
     },
     {
         provide: MatFormFieldControl,
-        useExisting: forwardRef(() => AswCard),
+        useExisting: AswCard,
         multi: true
     }],
     encapsulation: ViewEncapsulation.None
 })
-export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, OnDestroy {
+export class AswCard implements ControlValueAccessor, MatFormFieldControl<AswCard>, OnInit, DoCheck, OnDestroy {
+    static nextId = 0;
+    ngControl: NgControl | null = null;
+    focused = false;
+    errorState = false;
+    cardNumber = '';
+    cardIcon = cardIcons.default;
+    onChange: any;
+    onTouched: any;
+    stateChanges = new Subject<void>();
+    cardMaxlength = 19;
+
+    @Input()
+    get empty(): boolean {
+        const value = this.cardNumber.replace(/\s/g, '');
+        return !(!!value);
+    }
 
     @Input()
     get value(): any {
@@ -47,16 +75,18 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         this.onChange(cardNumber);
         this.stateChanges.next();
     }
+    private value$: any;
 
     @Input()
     get required(): boolean {
         return this.required$;
     }
 
-    set required(requiredValue: boolean) {
-        this.required$ = coerceBooleanProperty(requiredValue);
+    set required(value: BooleanInput) {
+        this.required$ = coerceBooleanProperty(value);
         this.stateChanges.next();
     }
+    private required$ = false;
 
     @Input()
     get disabled(): boolean {
@@ -65,10 +95,12 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         }
         return this.disabled$;
     }
-    set disabled(disabledValue: boolean) {
-        this.disabled$ = coerceBooleanProperty(disabledValue);
+
+    set disabled(value: BooleanInput) {
+        this.disabled$ = coerceBooleanProperty(value);
         this.stateChanges.next();
     }
+    private disabled$ = false;
 
     @Input()
     get placeholder(): string {
@@ -78,28 +110,18 @@ export class AswCard implements OnInit, MatFormFieldControl<AswCard>, DoCheck, O
         this.placeholder$ = placeholderValue;
         this.stateChanges.next();
     }
-
-    @Input()
-    get empty(): boolean {
-        const value = this.cardNumber.replace(/\s/g, '');
-        return !(!!value);
-    }
-    static nextId = 0;
-    @Input() inputClass!: string;
-    private value$: any;
-    private required$ = false;
-    private disabled$ = false;
     private placeholder$!: string;
 
-    cardNumber = '';
-    onTouched: any;
-    focused = false;
-    cardMaxlength = 19;
-    cardIcon = cardIcons.default;
-    errorState = false;
-    ngControl: NgControl | null = null;
-    stateChanges = new Subject<void>();
-    onChange: any;
+    @Input()
+    get aswDefaultStyles(): boolean {
+        return this.aswDefaultStyles$;
+    }
+    set aswDefaultStyles(val: BooleanInput) {
+        this.aswDefaultStyles$ = coerceBooleanProperty(val);
+    }
+    private aswDefaultStyles$ = false;
+
+    @Input() aswInputClass?: string;
 
     @HostBinding() id = `asw-card-${AswCard.nextId}`;
     @HostBinding('attr.aria-describedByIds') describedByIds = '';
