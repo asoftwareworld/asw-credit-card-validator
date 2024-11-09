@@ -88,18 +88,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "asw-credit-card-validator:build"
+                      "buildTarget": "asw-credit-card-validator:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "asw-credit-card-validator:build:production"
+                          "buildTarget": "asw-credit-card-validator:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "asw-credit-card-validator:build"
+                      "buildTarget": "asw-credit-card-validator:build"
                     }
                 },
                 "test": {

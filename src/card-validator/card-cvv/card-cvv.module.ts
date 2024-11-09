@@ -7,7 +7,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AswCardCvv } from './card-cvv';
@@ -20,6 +20,7 @@ import { AswDirectiveModule } from '@asoftwareworld/card-validator/common';
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
         AswDirectiveModule
